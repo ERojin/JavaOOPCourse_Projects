@@ -13,6 +13,9 @@ Açıklamalar:
 -----------------------------------------------------------------------------------------------------------------------*/
 package histogramdata;
 
+import static java.lang.Math.floor;
+import static org.csystem.util.array.ArrayUtil.max;
+
 public class Histogram_Data {
     public static int [] getHistogramData(int [] a, int n)
     {
@@ -23,4 +26,20 @@ public class Histogram_Data {
 
         return counts;
     }
+
+    public static void drawHistogram(int [] data, int count, char ch)
+    {
+        int maxVal =max(data);
+
+        for (int i = 0; i < data.length; ++i) {
+            int charCount = (int)floor(data[i] * count / (double) maxVal);
+
+            while (charCount -- > 0)
+                System.out.print(ch);
+
+            System.out.println();
+        }
+
+    }
+
 }
