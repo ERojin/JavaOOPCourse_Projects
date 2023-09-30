@@ -9,7 +9,8 @@ package randomdate;
 import java.util.Random;
 
 public class DateUtil {
-    public Random r;
+    public static String[] months = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    public static int[] daysOfMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public static void printRandomDate(Random r)
     {
@@ -22,77 +23,32 @@ public class DateUtil {
 
     public static String printDate(int day, int month, int year)
     {
-        return (suffix(day)) + " " + getMonth(month) + " " + (year + "") ;
+        return (day + suffix(day)) + " " + months[month] + " " + (year + "") ;
     }
     public static String suffix(int day)
     {
-        String ordinalnumberofday = "";
+        String suffix ;
 
         switch (day) {
-            case 1,21,31 -> ordinalnumberofday = day + "st";
-            case 2,22 -> ordinalnumberofday = day + "nd";
-            case 3,23 -> ordinalnumberofday = day + "rd";
-            default -> ordinalnumberofday = day + "th";
+            case 1,21,31 -> suffix = "st";
+            case 2,22 -> suffix =  "nd";
+            case 3,23 -> suffix =  "rd";
+            default -> suffix = "th";
         }
-        return ordinalnumberofday;
+        return suffix;
     }
-    public static String getMonth(int month)
+    public static int getDayOfYear(int day, int month, int year)
     {
-        String nameofmonth = "";
+        if (!isValidDate(day, month, year))
+            return -1;
 
-        switch (month) {
-            case 1 -> nameofmonth = "Jan";
-            case 2 -> nameofmonth = "Feb";
-            case 3 -> nameofmonth = "Mar";
-            case 4 -> nameofmonth = "Apr";
-            case 5 -> nameofmonth = "May";
-            case 6 -> nameofmonth = "Jun";
-            case 7 -> nameofmonth = "Jul";
-            case 8 -> nameofmonth = "Aug";
-            case 9 -> nameofmonth = "Sept";
-            case 10 -> nameofmonth = "Oct";
-            case 11 -> nameofmonth = "Nov";
-            case 12 -> nameofmonth = "Dec";
-        }
-        return nameofmonth;
+        int total = day;
+
+        for (int m = month - 1; m >= 1; --m)
+            total += daysOfMonths[m - 1];
+
+        return month > 2 && isLeapYear(year) ? total + 1 : total;
     }
-        public static int getDayOfYear(int day, int month, int year)
-        {
-            if (!isValidDate(day, month, year))
-                return -1;
-
-            int total = day;
-
-            switch (month - 1) {
-                case 11:
-                    total += 30;
-                case 10:
-                    total += 31;
-                case 9:
-                    total += 30;
-                case 8:
-                    total += 31;
-                case 7:
-                    total += 31;
-                case 6:
-                    total += 30;
-                case 5:
-                    total += 31;
-                case 4:
-                    total += 30;
-                case 3:
-                    total += 31;
-                case 2:
-                    total += 28;
-                    if (isLeapYear(year))
-                        ++total;
-                case 1:
-                    total += 31;
-            }
-
-            return total;
-        }
-
         public static boolean isValidDate(int day, int month, int year)
         {
             return 1 <= day && day <= 31 && 1 <= month && month <= 12 && day <= getDays(month, year);
@@ -100,16 +56,7 @@ public class DateUtil {
 
         public static int getDays(int month, int year)
         {
-            return switch (month) {
-                case 4, 6, 9, 11 -> 30;
-                case 2 -> {
-                    if (isLeapYear(year))
-                        yield 29;
-
-                    yield 28;
-                }
-                default -> 31;
-            };
+            return month == 2 && isLeapYear(year) ? 29 : daysOfMonths[month - 1];
         }
 
         public static boolean isLeapYear(int year)
