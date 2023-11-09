@@ -105,16 +105,16 @@ public class ArrayUtil {
 
     public static int [] join(int [] a, int [] b)
     {
-       int [] result = new int[a.length + b.length];
-       int idx = 0;
+        int [] result = new int[a.length + b.length];
+        int idx = 0;
 
-       for (int i = 0; i < a.length; ++i)
-           result[idx++] = a[i];
+        for (int i = 0; i < a.length; ++i)
+            result[idx++] = a[i];
 
-       for (int i = 0 ; i < b.length; ++i)
-           result[idx++] = b[i];
+        for (int i = 0 ; i < b.length; ++i)
+            result[idx++] = b[i];
 
-       return result;
+        return result;
 
     }
     public static int min(int [] a)
@@ -137,9 +137,19 @@ public class ArrayUtil {
 
         return result;
     }
-    public static void print (int [] a)
+    public static void print(int [] a)
     {
-       print (1, a);
+        print (1, a);
+    }
+
+    public static void print(int [][] a)
+    {
+        print(1,a);
+    }
+    public static void print(int n, int [][] a)
+    {
+        for (int i = 0; i < a.length; ++i)
+            print(n, a[i]);
     }
 
     public static void print(int n, int [] a)
@@ -154,19 +164,19 @@ public class ArrayUtil {
 
     public static int partition(int [] a, int thresold)
     {
-      int partitionIndex = 0;
+        int partitionIndex = 0;
 
-      while (partitionIndex != a.length && a[partitionIndex] < thresold)
-          ++partitionIndex;
+        while (partitionIndex != a.length && a[partitionIndex] < thresold)
+            ++partitionIndex;
 
-      if (partitionIndex == a.length)
-          return partitionIndex;
+        if (partitionIndex == a.length)
+            return partitionIndex;
 
-      for (int i = partitionIndex + 1; i < a.length; ++i)
-          if (a[i] < thresold)
-              swap(a, i, partitionIndex++);
+        for (int i = partitionIndex + 1; i < a.length; ++i)
+            if (a[i] < thresold)
+                swap(a, i, partitionIndex++);
 
-      return partitionIndex;
+        return partitionIndex;
     }
     public static void reverse(int [] a)
     {
@@ -198,7 +208,7 @@ public class ArrayUtil {
 
         a[i] = a[k];
         a[k] = temp;
-     }
+    }
 
     public static int sum(int [] a)
     {
