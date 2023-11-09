@@ -1,4 +1,4 @@
-package question1;
+package Question1;
 
 public class FindTextInCurly {
     public String text;

@@ -12,7 +12,7 @@
 	- {}
 	- Bu örnekten }daha zor {örnekler
 -----------------------------------------------------------------------------------------------------------------------*/
-package question1;
+package Question1;
 
 import java.util.Scanner;
 

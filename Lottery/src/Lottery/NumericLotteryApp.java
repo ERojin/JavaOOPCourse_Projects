@@ -17,7 +17,8 @@ public class NumericLotteryApp {
             if (count <= 0)
                 break;
 
-            ArrayUtil.print(2,numericLottery.getNumbers(count));
+            while (count-- > 0)
+                ArrayUtil.print(2,numericLottery.getNumbers());
         }
     }
 }

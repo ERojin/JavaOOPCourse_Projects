@@ -14,7 +14,9 @@ public class NumericLottery {
                 numbers[idx++] = i;
 
         return numbers;
+
     }
+
     public boolean [] getflags()
     {
         boolean flags [] = new boolean[50];
@@ -48,15 +50,5 @@ public class NumericLottery {
     public int [] getNumbers()
     {
         return getNumbers(getflags());
-    }
-
-    public int [][] getNumbers(int count)
-    {
-        int [][] numbers = new int[count][];
-
-        for (int i = 0; i < count; ++i)
-            numbers[i] = getNumbers();
-
-        return numbers;
     }
 }
