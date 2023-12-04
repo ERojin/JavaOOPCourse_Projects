@@ -15,73 +15,104 @@ import static org.csystem.util.array.ArrayUtil.*;
 
 
 public class ExamSimulation {
-  public String lectureName;
-  public int [][] grades;
-  public double [] averages;
-  public double average;
-  public void fillGrades()
-  {
-     Random r = new Random();
-     Scanner kb = new Scanner(System.in);
+    private String m_lectureName;
+    private int [][] m_grades;
+    private double [] m_averages;
+    private double m_average;
 
-      System.out.printf("%s sınavına giren şube sayısını giriniz:", lectureName);
-      grades = new int[Integer.parseInt(kb.nextLine())][];
-      averages = new double[grades.length];
+    public void fillGrades()
+    {
+        Random r = new Random();
+        Scanner kb = new Scanner(System.in);
 
-      for (int i = 0; i < grades.length; ++i) {
-          System.out.printf("%d. şubenin öğrenci sayısını giriniz:", i+1);
-          grades[i] = getRandomArray(r, Integer.parseInt(kb.nextLine()), 0, 101);
-      }
+        System.out.printf("%s sınavına giren şube sayısını giriniz:", m_lectureName);
+        m_grades = new int[Integer.parseInt(kb.nextLine())][];
+        m_averages = new double[m_grades.length];
 
-  }
-  public void calculateResults()
-  {
-      int totalGrades = 0;
-      int totalNumberOfStudents = 0;
+        for (int i = 0; i < m_grades.length; ++i) {
+            System.out.printf("%d.şubenin öğrenci sayısı?", i + 1);
+            m_grades[i] = ArrayUtil.getRandomArray(r, Integer.parseInt(kb.nextLine()), 0, 101);
+        }
+    }
 
-      for (int i = 0; i < grades.length; ++i) {
-          int total = sum(grades[i]);
+    public void calculateResults()
+    {
+        int totalNumberOfStudents = 0;
+        int totalGrades = 0;
 
-          averages[i] = (double)total / grades[i].length;
-          totalGrades += total;
-          totalNumberOfStudents += grades[i].length;
-      }
+        for (int i = 0; i < m_grades.length; ++i) {
+            int total = ArrayUtil.sum(m_grades[i]);
 
-      average = (double)totalGrades / totalNumberOfStudents;
-  }
+            m_averages[i] = (double)total / m_grades[i].length;
+            totalGrades += total;
+            totalNumberOfStudents += m_grades[i].length;
+        }
+        m_average = (double)totalGrades / totalNumberOfStudents;
+    }
+
     public ExamSimulation(String name)
     {
-        lectureName = name;
+        m_lectureName = name;
     }
-  public void run()
-  {
-      fillGrades();
-      calculateResults();
-  }
+    public int getClassCount()
+    {
+        return m_grades.length;
+    }
 
-  public void printAverages()
-  {
-      System.out.printf("%s dersi için not ortalamaları:%n ", lectureName);
-      for (int i = 0; i < averages.length; ++i)
-          System.out.printf("%d.şubenin not ortalaması:%f%n", i + 1, averages[i]);
+    public int getStudentCount(int i)
+    {
+        return m_grades[i].length;
+    }
 
-      System.out.printf("Okul not ortalaması:%f%n", average);
+    public int getGrade(int i, int k)
+    {
+        return m_grades[i][k];
+    }
 
-  }
-  public void printGrades()
-  {
-      System.out.println("-------------------------------------");
-      System.out.printf("%s dersinin sınav notları:%n", lectureName);
-      for (int i = 0; i < grades.length; ++i) {
-          System.out.printf("%d.şubenin sınav notları:%n", i + 1);
-          print(2, grades[i]);
-      }
-      System.out.println("-------------------------------------");
-  }
+    public double getAverage(int i)
+    {
+        return m_averages[i];
+    }
 
-  public void printReport()
-  {
-      printGrades();
-      printAverages();
-  }
+    public double getAverage()
+    {
+        return m_average;
+    }
+
+    public void run()
+    {
+        fillGrades();
+        calculateResults();
+    }
+
+    public void printAverages()
+    {
+        System.out.printf("%s dersi için not ortalamaları:%n", m_lectureName);
+        System.out.println("----------------------------------------------------------------------------------------");
+        for (int i = 0; i < m_averages.length; ++i)
+            System.out.printf("%d.şube not ortalaması:%f%n", i + 1, m_averages[i]);
+
+        System.out.printf("Okul ortalaması:%f%n", m_average);
+        System.out.println("----------------------------------------------------------------------------------------");
+    }
+
+    public void printGrades()
+    {
+        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.printf("%s dersi sınav notları:%n", m_lectureName);
+        for (int i = 0; i < m_grades.length; ++i) {
+            System.out.printf("%d.şube sınav notları:", i + 1);
+            ArrayUtil.print(2, m_grades[i]);
+        }
+        System.out.println("----------------------------------------------------------------------------------------");
+    }
+
+    public void printReport()
+    {
+        System.out.println("###########################################################################################");
+        printGrades();
+        printAverages();
+        System.out.println("###########################################################################################");
+    }
 }
+
