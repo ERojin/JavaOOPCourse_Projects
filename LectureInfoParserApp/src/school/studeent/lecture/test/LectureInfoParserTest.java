@@ -36,6 +36,7 @@ import school.studeent.lecture.LectureInfo;
 import school.studeent.lecture.LectureInfoParser;
 import school.studeent.lecture.LectureParserAppConsoleUtil;
 
+
 import java.util.Scanner;
 
 public class LectureInfoParserTest {
@@ -51,8 +52,8 @@ public class LectureInfoParserTest {
                 break;
 
             LectureInfoParser parser = new LectureInfoParser(str);
+            LectureParserAppConsoleUtil.printLectureInfo(parser.getLectureInfo());
 
-            LectureParserAppConsoleUtil.printLectureInfo(parser.lectureInfo);
         }
 
         System.out.println("Tekrar yapıyor musunuz?");
