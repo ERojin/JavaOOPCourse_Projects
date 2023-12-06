@@ -1,10 +1,10 @@
 package Lottery;
 import java.util.Random;
-
+ 
 public class NumericLottery {
-    public Random random;
+    private Random m_random;
 
-    public static int [] getNumbers(boolean [] flags)
+    private static int [] getNumbers(boolean [] flags)
     {
         int [] numbers = new int[6];
         int idx = 0;
@@ -17,7 +17,7 @@ public class NumericLottery {
 
     }
 
-    public boolean [] getflags()
+    private boolean [] getflags()
     {
         boolean flags [] = new boolean[50];
 
@@ -39,12 +39,12 @@ public class NumericLottery {
 
     public NumericLottery()
     {
-        random = new Random();
+        m_random = new Random();
     }
 
     public NumericLottery(Random r)
     {
-        random = r;
+        m_random = r;
     }
 
     public int [] getNumbers()
