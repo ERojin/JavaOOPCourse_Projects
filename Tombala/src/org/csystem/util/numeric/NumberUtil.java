@@ -1,7 +1,6 @@
 /*----------------------------------------------------------------
 	FILE		: NumberUtil.java
 	AUTHOR		: Java-Aug-2022 Group
-	LAST UPDATE	: 18.02.2023
 
 	Utility class for numeric operations
 
