@@ -3,7 +3,7 @@ package school.studeent.lecture;
 import date.DateUtil;
 
 public class LectureInfoParser {
-    private LectureInfo m_lectureInfo;
+    private final LectureInfo m_lectureInfo;
 
     public static String getDateStr(String str)
     {
