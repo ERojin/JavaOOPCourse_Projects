@@ -89,7 +89,7 @@ public class IntValue {
         return result;
     }
 
-    public IntValue [] divideAndReminder(IntValue value)
+    public IntValue [] divideAndRemainder(IntValue value)
     {
        return divideAndRemainder(value.m_value);
     }
