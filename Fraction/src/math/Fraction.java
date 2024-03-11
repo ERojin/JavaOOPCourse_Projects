@@ -62,9 +62,10 @@ public class Fraction {
     private static void check(int a, int b)
     {
         if (b == 0) {
-            System.out.printf("%s:%d, %d%n", a == 0 ? "Indeterminate" : "Undefined", a, b);
+            if (a == 0)
+                throw new NumberFormatException("Indeterminate");
 
-            System.exit(1);
+            throw new NumberFormatException("Undefined");
         }
     }
 
